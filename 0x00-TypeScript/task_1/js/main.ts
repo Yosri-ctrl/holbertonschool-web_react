@@ -14,4 +14,34 @@ interface Directors extends Teacher {
 function printTeacher(firstName: string, lastName: string): string {
 	return `${firstName[0]}. ${lastName}`;
 }
+console.log(printTeacher('John', 'Doe'));
 export default printTeacher;
+
+interface classInterface {
+	firstName: string;
+	lastName: string;
+	workOnHomework(): string;
+	displayName(): string;
+}
+
+interface classConstructor {
+	new(firstName: string, lastName: string): classInterface;
+}
+
+class StudentClass implements classInterface {
+	firstName: string;
+	lastName: string;
+
+	constructor(firstName: string, lastName: string) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	workOnHomework(): string {
+		return "Currently working";
+	}
+
+	displayName(): string {
+		return this.firstName;
+	}
+}
