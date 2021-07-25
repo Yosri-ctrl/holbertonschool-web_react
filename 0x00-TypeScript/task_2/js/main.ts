@@ -1,47 +1,45 @@
-interface Teacher {
-	readonly firstName: string;
-	readonly lastName: string;
-	fullTimeEmployee: boolean;
-	yearsOfExperience?: number;
-	location: string;
-	[propName: string]: any;
+interface DirectorInterface {
+  workFromHome(): string;
+  getCoffeeBreak(): string;
+  workDirectorTasks(): string;
 }
 
-interface Directors extends Teacher {
-	numberOfReports: number;
+interface TeacherInterface {
+  workFromHome(): string;
+  getCoffeeBreak(): string;
+  workTeacherTasks(): string;
 }
 
-function printTeacher(firstName: string, lastName: string): string {
-	return `${firstName[0]}. ${lastName}`;
-}
-console.log(printTeacher('John', 'Doe'));
-export default printTeacher;
-
-interface classInterface {
-	firstName: string;
-	lastName: string;
-	workOnHomework(): string;
-	displayName(): string;
+export class Director implements DirectorInterface {
+  workFromHome = () => 'Working from home';
+  getCoffeeBreak = () => 'Getting a coffee break';
+  workDirectorTasks = () => 'Getting to director tasks';
 }
 
-interface classConstructor {
-	new(firstName: string, lastName: string): classInterface;
+export class Teacher implements TeacherInterface {
+  workFromHome = () => 'Cannot work from home';
+  getCoffeeBreak = () => 'Cannot have a break';
+  workTeacherTasks = () => 'Getting to work';
 }
 
-class StudentClass implements classInterface {
-	firstName: string;
-	lastName: string;
-
-	constructor(firstName: string, lastName: string) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
-
-	workOnHomework(): string {
-		return "Currently working";
-	}
-
-	displayName(): string {
-		return this.firstName;
-	}
+export function createEmployee (salary: number | string){
+	if (typeof salary === "number"){
+    return new Teacher();
+  }
+  return new Director();
 }
+
+export function isDirector(employee: TeacherInterface | DirectorInterface): employee is Director {
+  return (employee as Director).workDirectorTasks !== undefined;
+}
+
+export function executeWork(employee: DirectorInterface | TeacherInterface): string {
+  let emp = undefined;
+  if (isDirector(employee)){
+    emp = employee.workDirectorTasks();
+  } else {
+    emp = employee.workTeacherTasks();
+  }
+  return emp;
+}
+
