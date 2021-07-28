@@ -1,2 +1,3 @@
-import fromJS from 'Immutable.js';
-export default function getImmutableObject(obj) { fromJS(obj); }
+import fromJS from 'immutable';
+const getImmutableObject = (object) => fromJS(object);
+export default getImmutableObject;
