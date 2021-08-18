@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import './Notifications.css';
-import close_icon from '../assets/close-icon.png';
+import close_icon from '../assets/close.png';
 import NotificationItem from './NotificationItem';
 import PropTypes from 'prop-types';
 import NotificationItemShape from './NotificationItemShape';
